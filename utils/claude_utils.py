@@ -45,20 +45,20 @@ class Claude:
         return False
     
     #FOXY_OLD
-    async def send_message_stream_old(self, message):
-        self.prompt = f"{self.prompt}{HUMAN_PROMPT} {message}{AI_PROMPT}"
-        response = await self.client.completions.create(
-            prompt=self.prompt,
-            model=self.model,
-            temperature=self.temperature,
-            stream=True,
-            max_tokens_to_sample=100000,
-        )
-        answer = ""
-        async for data in response:
-            answer = f"{answer}{data.completion}"
-            yield answer
-        self.prompt = f"{self.prompt}{answer}"
+    # async def send_message_stream_old(self, message):
+    #     self.prompt = f"{self.prompt}{HUMAN_PROMPT} {message}{AI_PROMPT}"
+    #     response = await self.client.completions.create(
+    #         prompt=self.prompt,
+    #         model=self.model,
+    #         temperature=self.temperature,
+    #         stream=True,
+    #         max_tokens_to_sample=100000,
+    #     )
+    #     answer = ""
+    #     async for data in response:
+    #         answer = f"{answer}{data.completion}"
+    #         yield answer
+    #     self.prompt = f"{self.prompt}{answer}"
 
     #FOXY_NEW
     async def send_message_stream(self, message):
