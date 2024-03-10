@@ -93,8 +93,9 @@ class Claude:
         #     messages.append(self.initial_prompt)
             
         # # append remainder of payload
-        messages.append(self.chat_history)
+        messages = self.chat_history
 
+        
 
         async with self.client.messages.stream(
             max_tokens=1024,
