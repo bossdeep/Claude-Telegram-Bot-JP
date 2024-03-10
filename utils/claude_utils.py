@@ -85,6 +85,14 @@ class Claude:
             #     yield accumulated.model_dump_json(indent=2)
                 
 
+    def get_text_from_content(content):
+        text = ""
+        for block in content:
+            if block["type"] == "text":
+                text += block["text"] + "\n"
+        return text.strip()
+    
+    
     async def send_message_stream(self, message):
         self.chat_history.append({"role": "user", "content": message})
 
@@ -110,5 +118,6 @@ class Claude:
             accumulated = await stream.get_final_message()
             # self.chat_history.append(accumulated.message)
             self.chat_history.append({"role": "assistant", "content": accumulated.content})
-            yield accumulated.model_dump_json(indent=2)
-            # yield accumulated.content
+            output_text = get_text_from_content(accumulated.content)
+            # yield accumulated.model_dump_json(indent=2)
+            yield output_text
