@@ -108,6 +108,7 @@ class Claude:
     async def send_message_stream(self, message):
         # self.initial_prompt = {"role": "user", "content": "You are a dog. Pretend to be one."}  # Add this line to store the system prompt
 
+        ##FOXY need to ensure that only append new history if prior message is confirmed to be ASSISTANT
         self.chat_history.append({"role": "user", "content": message})
 
         messages= []
