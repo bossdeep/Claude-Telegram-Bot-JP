@@ -78,7 +78,7 @@ class Claude:
         # self.prompt = f"{self.prompt}{answer}"
 
         async with self.client.messages.stream(
-            max_tokens=100000,
+            max_tokens=1024,
             messages=[
                 {
                     "role": "user",
