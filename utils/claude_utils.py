@@ -104,10 +104,10 @@ class Claude:
 
         messages= []
         if self.initial_prompt: #place initial prompt at start of prompt payload
-            messages=self.initial_prompt
+            messages.append =self.initial_prompt
             
         # # append remainder of payload
-        messages.append(self.chat_history)
+        messages.extend(self.chat_history)
         # messages = self.chat_history
 
         
