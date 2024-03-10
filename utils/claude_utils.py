@@ -98,11 +98,13 @@ class Claude:
     
     
     async def send_message_stream(self, message):
+        self.initial_prompt = {"role": "user", "content": "You are a dog. Pretend to be one."}  # Add this line to store the system prompt
+
         self.chat_history.append({"role": "user", "content": message})
 
         messages= []
         if self.initial_prompt: #place initial prompt at start of prompt payload
-            messages.append(self.initial_prompt)
+            messages=self.initial_prompt
             
         # # append remainder of payload
         messages.append(self.chat_history)
