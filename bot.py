@@ -328,15 +328,15 @@ async def change_cutoff(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def start_bot(update: Update, context: ContextTypes.DEFAULT_TYPE):
     welcome_strs = [
-        "Welcome to <b>Claude & Bard Telegram Bot</b>",
+        "<b>CoFli v0.1</b>",
         "",
         "Commands:",
         "• /id to get your chat identifier",
         "• /reset to reset the chat history",
         "• /retry to regenerate the answer",
         "• /seg to send message in segments",
-        "• /mode to switch between Claude & Bard",
-        "• /settings to show Claude & Bard settings",
+        # "• /mode to switch between Claude & Bard",
+        # "• /settings to show Claude & Bard settings",
     ]
     print(f"[i] {update.effective_user.username} started the bot")
     await update.message.reply_text("\n".join(welcome_strs), parse_mode=ParseMode.HTML)
@@ -360,9 +360,9 @@ async def post_init(application: Application):
             BotCommand("/reset", "Reset the chat history"),
             BotCommand("/retry", "Regenerate the answer"),
             BotCommand("/seg", "Send message in segments"),
-            BotCommand("/mode", "Switch between Claude & Bard"),
-            BotCommand("/settings", "Show Claude & Bard settings"),
-            BotCommand("/help", "Get help message"),
+            # BotCommand("/mode", "Switch between Claude & Bard"),
+            # BotCommand("/settings", "Show Claude & Bard settings"),
+            # BotCommand("/help", "Get help message"),
         ]
     )
 
