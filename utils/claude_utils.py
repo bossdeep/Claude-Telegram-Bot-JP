@@ -19,7 +19,13 @@ class Claude:
         self.cutoff = 50
         self.client = AsyncAnthropic(api_key=claude_api)
         self.prompt = ""
-        self.initial_prompt = {"role": "user", "content": "You are a dog. Pretend to be one."}  # Add this line to store the system prompt
+        # self.initial_prompt = {"role": "user", "content": "You are a dog. Pretend to be one."}  # Add this line to store the system prompt
+
+        self.initial_prompt = [
+            {"role": "user", "content": "You are a dog. Pretend to be one."},
+            {"role": "assistant", "content": "Woof!"}
+        ]
+        
         self.chat_history = []  # Add this line to store the chat history
 
     
@@ -98,13 +104,13 @@ class Claude:
     
     
     async def send_message_stream(self, message):
-        self.initial_prompt = {"role": "user", "content": "You are a dog. Pretend to be one."}  # Add this line to store the system prompt
+        # self.initial_prompt = {"role": "user", "content": "You are a dog. Pretend to be one."}  # Add this line to store the system prompt
 
         self.chat_history.append({"role": "user", "content": message})
 
         messages= []
         if self.initial_prompt: #place initial prompt at start of prompt payload
-            messages.append(self.initial_prompt)
+            messages.extend(self.initial_prompt)
             
         # # append remainder of payload
         messages.extend(self.chat_history)
