@@ -43,8 +43,9 @@ class Claude:
             self.cutoff = cutoff
             return True
         return False
-
-    async def send_message_stream(self, message):
+    
+    #FOXY_OLD
+    async def send_message_stream_old(self, message):
         self.prompt = f"{self.prompt}{HUMAN_PROMPT} {message}{AI_PROMPT}"
         response = await self.client.completions.create(
             prompt=self.prompt,
@@ -58,3 +59,39 @@ class Claude:
             answer = f"{answer}{data.completion}"
             yield answer
         self.prompt = f"{self.prompt}{answer}"
+
+    #FOXY_NEW
+    async def send_message_stream(self, message):
+        # self.prompt = f"{self.prompt}{HUMAN_PROMPT} {message}{AI_PROMPT}"
+        # response = await self.client.completions.create(
+        #     prompt=self.prompt,
+        #     model=self.model,
+        #     temperature=self.temperature,
+        #     stream=True,
+        #     max_tokens_to_sample=100000,
+        # )
+        # answer = ""
+        # async for data in response:
+        #     answer = f"{answer}{data.completion}"
+        #     yield answer
+        # #INCREMENTALLY SAVE CURRENT CHATS
+        # self.prompt = f"{self.prompt}{answer}"
+
+        async with self.client.messages.stream(
+            max_tokens=100000,
+            messages=[
+                {
+                    "role": "user",
+                    "content": "Say hello there!",
+                }
+            ],
+            model="claude-3-opus-20240229",
+        ) as stream:
+            async for text in stream.text_stream:
+                print(text, end="", flush=True)
+            print()
+
+        accumulated = await stream.get_final_message()
+        yield accumulated.model_dump_json(indent=2)
+        
+
