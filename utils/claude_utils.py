@@ -110,5 +110,5 @@ class Claude:
             accumulated = await stream.get_final_message()
             # self.chat_history.append(accumulated.message)
             self.chat_history.append({"role": "assistant", "content": accumulated.content})
-            # yield accumulated.content.model_dump_json(indent=2)
-            yield accumulated.content
+            yield accumulated.model_dump_json(indent=2)
+            # yield accumulated.content
