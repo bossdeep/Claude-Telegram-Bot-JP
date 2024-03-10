@@ -88,12 +88,12 @@ class Claude:
     async def send_message_stream(self, message):
         self.chat_history.append({"role": "user", "content": message})
 
-        # if self.initial_prompt:
-        #     messages = self.initial_prompt + self.chat_history
-        # else:
-        #     messages = self.chat_history
+        if self.initial_prompt: #place initial prompt at start of prompt payload
+            messages = messages.append(self.initial_prompt)
+            
+        #append remainder of payload
+        messages = messages.append(self.chat_history)
 
-        messages = self.chat_history
 
         async with self.client.messages.stream(
             max_tokens=1024,
