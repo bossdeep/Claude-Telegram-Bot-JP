@@ -89,10 +89,10 @@ class Claude:
         self.chat_history.append({"role": "user", "content": message})
 
         messages= []
-        if self.initial_prompt: #place initial prompt at start of prompt payload
-            messages.append(self.initial_prompt)
+        # if self.initial_prompt: #place initial prompt at start of prompt payload
+        #     messages.append(self.initial_prompt)
             
-        #append remainder of payload
+        # # append remainder of payload
         messages.append(self.chat_history)
 
 
