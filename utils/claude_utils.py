@@ -5,8 +5,8 @@ from config import claude_api
 def get_text_from_content(content):
     text = ""
     for block in content:
-        if block["type"] == "text":
-            text += block["text"] + "\n"
+        if block.type == "text":
+            text += block.text + "\n"
     return text.strip()
     
 class Claude:
