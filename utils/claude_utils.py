@@ -118,6 +118,6 @@ class Claude:
             accumulated = await stream.get_final_message()
             # self.chat_history.append(accumulated.message)
             self.chat_history.append({"role": "assistant", "content": accumulated.content})
-            output_text = get_text_from_content(accumulated.content)
+            output_text = self.get_text_from_content(accumulated.content)
             # yield accumulated.model_dump_json(indent=2)
             yield output_text
